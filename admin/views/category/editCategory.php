@@ -27,29 +27,30 @@
                         <div class="col-12">
                         <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Thêm đầu mục sách</h3>
+                <h3 class="card-title">Sửa đầu mục sách</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="<?=BASE_URL_ADMIN .'?act=them-danh-muc' ?>" method="POST">
+              <form action="<?=BASE_URL_ADMIN .'?act=sua-danh-muc' ?>" method="POST">
+                <input type="text" name="id" value="<?= $category['id']?>" hidden>
                 <div class="card-body">
                   <div class="form-group">
                     <label >Tên đầu mục</label>
-                    <input type="text" class="form-control" name="ten_danh_muc" placeholder="Nhập tên đầu mục sách">
+                    <input type="text" class="form-control" name="ten_danh_muc" value="<?= $category['ten_danh_muc']?>" placeholder="Nhập tên đầu mục sách">
                     <?php if(isset($errors['ten_danh_muc'])){ ?>
                        <p class="text-danger"><?= $errors['ten_danh_muc']?></p>
                   <?php  } ?>
                   </div>
                   <div class="form-group">
                     <label >Mô tả</label>
-                    <textarea name="mo_ta" id="" class="form-control" placeholder="Mô tả sách"></textarea>
+                    <textarea name="mo_ta" id="" class="form-control" placeholder="Mô tả sách"><?= $category['mo_ta'] ?></textarea>
                   </div>
  
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Thêm</button>
+                  <button type="submit" class="btn btn-primary">Sửa</button>
                 </div>
               </form>
             </div>

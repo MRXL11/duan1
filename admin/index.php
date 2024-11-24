@@ -23,4 +23,7 @@ match ($act) {
     'danh-muc'=>(new AdminCategoryController())->danhSachDanhMuc(),
     'form-them-danh-muc'=>(new AdminCategoryController())->formAddDanhMuc(),
     'them-danh-muc'=>(new AdminCategoryController())->postAddDanhMuc(),
+    'form-sua-danh-muc'=>(new AdminCategoryController())->formEditDanhMuc(),
+    'sua-danh-muc'=>(new AdminCategoryController())->postEditDanhMuc(),
+    'xoa-danh-muc'=>(new AdminCategoryController())->deleteDanhMuc(),
 };
