@@ -16,7 +16,7 @@ class HomeController{
     public function danhSachSach(){
         // echo "Danh sách";
         $listBook= $this->modelSach->getAllBook();
-        // var_dump($listBook);die;
+        // var_dump($listBook);die();
         require_once './views/listBook.php';
     }
 }
