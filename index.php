@@ -12,7 +12,7 @@ require_once './models/Sach.php';
 
 // Route
 $act = $_GET['act'] ?? '/'; // giống switchcase
-
+// var_dump($_GET['act'] );die();
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
 match ($act) {
@@ -21,5 +21,5 @@ match ($act) {
     '/' => (new HomeController())->home(),
     'trangchu'=> (new HomeController())->trangChu(),  // BASE_URL/?act='trangchu'
 
-    'danh_sach_sach'=>(new HomeController())->danhSachSach(),
+    'danh-sach-sach'=>(new HomeController())->danhSachSach(),
 };
