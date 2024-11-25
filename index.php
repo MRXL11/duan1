@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -52,3 +53,30 @@ if (method_exists($class, $action)) {
     echo "404 - Không tìm thấy trang.";
 }
 ?>
+=======
+<?php 
+
+// Require file Common
+require_once './commons/env.php'; // Khai báo biến môi trường
+require_once './commons/function.php'; // Hàm hỗ trợ
+
+// Require toàn bộ file Controllers
+require_once './controllers/HomeController.php';
+
+// Require toàn bộ file Models
+require_once './models/Sach.php';
+
+// Route
+$act = $_GET['act'] ?? '/'; // giống switchcase
+
+// Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
+
+match ($act) {
+    // route
+    // Trang chủ
+    '/' => (new HomeController())->home(),
+    'trangchu'=> (new HomeController())->trangChu(),  // BASE_URL/?act='trangchu'
+
+    'danh_sach_sach'=>(new HomeController())->danhSachSach(),
+};
+>>>>>>> 74c038dc22b6e174e5f2e93d170f52b4e17f6751

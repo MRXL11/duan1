@@ -2,20 +2,35 @@
 
 // Kết nối CSDL qua PDO
 function connectDB() {
+<<<<<<< HEAD
+=======
+    // Kết nối CSDL
+>>>>>>> 74c038dc22b6e174e5f2e93d170f52b4e17f6751
     $host = DB_HOST;
     $port = DB_PORT;
     $dbname = DB_NAME;
 
     try {
         $conn = new PDO("mysql:host=$host;port=$port;dbname=$dbname", DB_USERNAME, DB_PASSWORD);
+<<<<<<< HEAD
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+=======
+
+        // cài đặt chế độ báo lỗi là xử lý ngoại lệ
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // cài đặt chế độ trả dữ liệu
+        $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    
+>>>>>>> 74c038dc22b6e174e5f2e93d170f52b4e17f6751
         return $conn;
     } catch (PDOException $e) {
         echo ("Connection failed: " . $e->getMessage());
     }
 }
 
+<<<<<<< HEAD
 // Kiểm tra tài khoản đã tồn tại
 function isAccountExists($email, $so_dien_thoai) {
     $conn = connectDB();
@@ -56,3 +71,8 @@ function addAccount($ho_ten, $anh_dai_dien, $email, $so_dien_thoai, $mat_khau) {
     return $stmt->execute();
 }
 
+=======
+// Thêm mới dữ liệu
+// Xóa file
+// Debug
+>>>>>>> 74c038dc22b6e174e5f2e93d170f52b4e17f6751
