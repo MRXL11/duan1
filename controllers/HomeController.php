@@ -12,7 +12,8 @@ class HomeController{
         // echo "Danh sách";
         $search = isset($_GET['search']) ? $_GET['search'] : '';
         $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
-
+        $listCategory= $this->modelCategory->getAllCategory();
+        $top3Books = $this->modelBook->getTop3HighestPrice();
         // Lấy danh sách sách tùy thuộc vào kết quả tìm kiếm
         if ($search) {
             $listBook = $this->modelBook->searchBooks($search);
@@ -24,15 +25,9 @@ class HomeController{
                 $listBook = $this->modelBook->getAllBook();
             }
         }
-        // $listBook= $this->modelBook->getAllBook();
-        $listCategory= $this->modelCategory->getAllCategory();
-        $top3Books = $this->modelBook->getTop3HighestPrice();
-        // if (isset($_GET['category_id'])) {
-        //     $category_id = $_GET['category_id'];
-        //     $listBook = $this->modelBook->getBooksByCategory($category_id);
-        // }
-        // var_dump($listBook);die();
+
         require_once './views/home.php';
+
 
 }
 }

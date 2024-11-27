@@ -1,9 +1,5 @@
 <?php include_once 'layout/header.php'; ?>
-<style>
-    /* Đảm bảo rằng các cột trong .row có chiều rộng cố định và có khoảng cách giữa các ô */
-    /* Đảm bảo rằng các cột trong .row có chiều rộng cố định và có khoảng cách giữa các ô */
-    /* Đảm bảo rằng các cột trong .row có chiều rộng cố định và có khoảng cách giữa các ô */
-</style>
+
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace tg-haslayout">
         <div class="container">
@@ -23,13 +19,15 @@
 
                                                 <figure class="tg-featureimg">
                                                     <div class="tg-bookimg">
+                                                    <a href="?act=bookDetail&id=<?= $book['id'] ?>">    
                                                         <div class="tg-frontcover"><img src="<?= BASE_URL . $book['hinh_anh'] ?>" style="width: 100%; height: 100%; object-fit: cover;" alt=""
                                                                 onerror="this.onerror=null;
                                                              this.src='https://khothietke.net/wp-content/uploads/2021/05/PNGkhothietke.net-02705.png'"></div>
                                                         <div class="tg-backcover"><img src="<?= BASE_URL . $book['hinh_anh'] ?>" style="width: 100%; height: 100%; object-fit: cover;" alt=""
                                                                 onerror="this.onerror=null; 
                                                             this.src='https://khothietke.net/wp-content/uploads/2021/05/PNGkhothietke.net-02705.png'"></div>
-                                                    </div>
+                                                     </a>
+                                                </div>
 
                                                 </figure>
                                                 <div class="tg-postbookcontent">
@@ -39,7 +37,7 @@
                                                     </ul>
                                                     <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                                     <div class="tg-booktitle">
-                                                        <h3><a href="javascript:void(0);"><?= $book['ten'] ?></a></h3>
+                                                        <h3><a href="?act=bookDetail&id=<?= $book['id'] ?>"><?= $book['ten'] ?></a></h3>
                                                     </div>
                                                     <span class="tg-bookwriter">Tác giả: <?= $book['tac_gia'] ?></a></span>
                                                     <span class="tg-bookwriter"><?= $book['trang_thai'] == 1 ? 'Còn hàng' : 'Hết hàng' ?></a></span>

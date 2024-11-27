@@ -6,6 +6,7 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 
 // Require toàn bộ file Controllers
 require_once './controllers/HomeController.php';
+require_once './controllers/BookController.php';
 
 // Require toàn bộ file Models
 require_once './models/Book.php';
@@ -20,6 +21,7 @@ match ($act) {
     // route
     // Trang chủ
     '/' => (new HomeController())->home(),
-    'trangchu'=> (new HomeController())->home(),  // BASE_URL/?act='trangchu'
-    'home'  => (new HomeController())->home(), //
+    'home'  => (new HomeController())->home(), 
+
+    'bookDetail' => (new BookController())->bookDetail(),
 };

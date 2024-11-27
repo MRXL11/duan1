@@ -76,4 +76,23 @@ public function getBooksByCategory($category_id) {
     }
 }
 
+
+// Lấy sách theo ID
+public function getBookById($id) {
+    try {
+        $sql = 'SELECT sanphams.*, danhmucs.ten_danh_muc
+                FROM sanphams 
+                INNER JOIN danhmucs ON sanphams.id_danh_muc = danhmucs.id
+                WHERE sanphams.id = :id';
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    } catch (Exception $e) {
+        echo "Lỗi: " . $e->getMessage();
+    }
+}
+
 }
