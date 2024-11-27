@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 // Require file Common
 require_once '../commons/env.php'; // Khai báo biến môi trường
 require_once '../commons/function.php'; // Hàm hỗ trợ
@@ -9,8 +9,8 @@ require_once './controllers/AdminCategoryController.php';
 require_once './controllers/AdminBookController.php';
 
 // Require toàn bộ file Models
-require_once './models/AdminBook.php'; 
-require_once './models/AdminCategory.php'; 
+require_once './controllers/AdminBook.php'; 
+require_once './controllers/AdminCategory.php'; 
 
 // Route
 $act = $_GET['act'] ?? '/'; // giống switchcase
@@ -19,20 +19,6 @@ $act = $_GET['act'] ?? '/'; // giống switchcase
 
 match ($act) {
     // route
-    // Danh mục
-    'danh-muc'=>(new AdminCategoryController())->danhSachDanhMuc(),
-    'form-them-danh-muc'=>(new AdminCategoryController())->formAddDanhMuc(),
-    'them-danh-muc'=>(new AdminCategoryController())->postAddDanhMuc(),
-    'form-sua-danh-muc'=>(new AdminCategoryController())->formEditDanhMuc(),
-    'sua-danh-muc'=>(new AdminCategoryController())->postEditDanhMuc(),
-    'xoa-danh-muc'=>(new AdminCategoryController())->deleteDanhMuc(),
-
-
-    //sản phẩm
-    'san-pham'=>(new AdminBookController())->danhSachSanPham(),
-    'form-them-san-pham'=>(new AdminBookController())->formAddSanPham(),
-    'them-san-pham'=>(new AdminBookController())->postAddSanPham(),
-    // 'form-sua-san-pham'=>(new AdminBookController())->formEditSanPham(),
-    // 'sua-san-pham'=>(new AdminBookController())->postEditSanPham(),
-    // 'xoa-san-pham'=>(new AdminBookController())->deleteSanPham(),
+    // Trang chủ
+    
 };
