@@ -1,22 +1,33 @@
 <?php 
 class HomeController{
-
-    public $modelSach;
+    public $modelCategory;
+    public $modelBook;
     
     public function __construct(){
-        $this->modelSach = new Sach();
+        $this->modelBook = new Book();
+        $this->modelCategory = new Category();
     }
 
     public function home(){
-        echo "Welcome to the home page!";
-    }
-    public function trangChu(){
-        echo "Trang chủ";
-    }
-    public function danhSachSach(){
         // echo "Danh sách";
-        $listBook= $this->modelSach->getAllBook();
-        // var_dump($listBook);die;
-        require_once './views/listBook.php';
-    }
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
+        $listCategory= $this->modelCategory->getAllCategory();
+        $top3Books = $this->modelBook->getTop3HighestPrice();
+        // Lấy danh sách sách tùy thuộc vào kết quả tìm kiếm
+        if ($search) {
+            $listBook = $this->modelBook->searchBooks($search);
+        } else {
+            // Nếu có category_id, lấy sách theo danh mục, nếu không thì lấy tất cả sách
+            if ($category_id) {
+                $listBook = $this->modelBook->getBooksByCategory($category_id);
+            } else {
+                $listBook = $this->modelBook->getAllBook();
+            }
+        }
+
+        require_once './views/home.php';
+
+
+}
 }

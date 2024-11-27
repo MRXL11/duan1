@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 13, 2024 at 07:20 AM
+-- Generation Time: Nov 24, 2024 at 04:51 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -43,6 +43,18 @@ CREATE TABLE `binhluans` (
 INSERT INTO `binhluans` (`id`, `san_pham_id`, `tai_khoan_id`, `noi_dung`, `ngay_dang`, `trang_thai`) VALUES
 (1, 1, 1, 'Cuốn sách rất hay và đáng đọc!', '2024-11-05 12:00:00', 1),
 (2, 2, 1, 'Nội dung thú vị và ý nghĩa.', '2024-11-06 14:30:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chitietbienthes`
+--
+
+CREATE TABLE `chitietbienthes` (
+  `id` int NOT NULL,
+  `sanpham_bien_the_id` int NOT NULL,
+  `mo_ta_chi_tiet` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -196,30 +208,46 @@ INSERT INTO `phuongthucthanhtoans` (`id`, `ten_phuong_thuc`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sanphambienthes`
+--
+
+CREATE TABLE `sanphambienthes` (
+  `id` int NOT NULL,
+  `san_pham_id` int NOT NULL,
+  `ten_bien_the` varchar(255) NOT NULL,
+  `gia` decimal(10,2) NOT NULL,
+  `so_luong` int DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sanphams`
 --
 
 CREATE TABLE `sanphams` (
   `id` int NOT NULL,
-  `ten` varchar(255) NOT NULL,
-  `gia` decimal(10,2) NOT NULL,
-  `gia_khuyen_mai` decimal(10,2) DEFAULT NULL,
   `hinh_anh` varchar(255) DEFAULT NULL,
   `so_luong` int NOT NULL,
   `ngay_nhap` date NOT NULL,
   `mo_ta` text,
-  `danh_muc_id` int NOT NULL,
-  `trang_thai` tinyint NOT NULL DEFAULT '1'
+  `trang_thai` tinyint NOT NULL DEFAULT '1',
+  `ten` varchar(255) NOT NULL,
+  `tac_gia` varchar(255) NOT NULL,
+  `id_danh_muc` int NOT NULL,
+  `nha_xuat_ban` varchar(255) NOT NULL,
+  `nam_xuat_ban` int NOT NULL,
+  `gia` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `sanphams`
 --
 
-INSERT INTO `sanphams` (`id`, `ten`, `gia`, `gia_khuyen_mai`, `hinh_anh`, `so_luong`, `ngay_nhap`, `mo_ta`, `danh_muc_id`, `trang_thai`) VALUES
-(1, 'Sapiens: Lược sử loài người', '200000.00', '180000.00', 'sapiens.jpg', 100, '2024-10-01', NULL, 2, 1),
-(2, 'Tư duy nhanh và chậm', '180000.00', '170000.00', 'thinking_fast_slow.jpg', 50, '2024-10-05', NULL, 2, 1),
-(3, 'Nhà giả kim', '150000.00', '130000.00', 'alchemist.jpg', 30, '2024-11-01', NULL, 1, 1);
+INSERT INTO `sanphams` (`id`, `hinh_anh`, `so_luong`, `ngay_nhap`, `mo_ta`, `trang_thai`, `ten`, `tac_gia`, `id_danh_muc`, `nha_xuat_ban`, `nam_xuat_ban`, `gia`) VALUES
+(1, 'sapiens.jpg', 100, '2024-10-01', NULL, 1, '', '', 1, '', 0, '0.00'),
+(2, 'thinking_fast_slow.jpg', 50, '2024-10-05', NULL, 1, '', '', 2, '', 0, '0.00'),
+(3, 'alchemist.jpg', 30, '2024-11-01', NULL, 1, '', '', 3, '', 0, '0.00');
 
 -- --------------------------------------------------------
 
@@ -278,6 +306,13 @@ ALTER TABLE `binhluans`
   ADD KEY `tai_khoan_id` (`tai_khoan_id`);
 
 --
+-- Indexes for table `chitietbienthes`
+--
+ALTER TABLE `chitietbienthes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sanpham_bien_the_id` (`sanpham_bien_the_id`);
+
+--
 -- Indexes for table `chitietdonhangs`
 --
 ALTER TABLE `chitietdonhangs`
@@ -329,11 +364,18 @@ ALTER TABLE `phuongthucthanhtoans`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sanphambienthes`
+--
+ALTER TABLE `sanphambienthes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `san_pham_id` (`san_pham_id`);
+
+--
 -- Indexes for table `sanphams`
 --
 ALTER TABLE `sanphams`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `danh_muc_id` (`danh_muc_id`);
+  ADD KEY `fk_sanphams_danhmucs` (`id_danh_muc`);
 
 --
 -- Indexes for table `taikhoans`
@@ -358,6 +400,12 @@ ALTER TABLE `trangthaidonhangs`
 --
 ALTER TABLE `binhluans`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `chitietbienthes`
+--
+ALTER TABLE `chitietbienthes`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `chitietdonhangs`
@@ -402,6 +450,12 @@ ALTER TABLE `phuongthucthanhtoans`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `sanphambienthes`
+--
+ALTER TABLE `sanphambienthes`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `sanphams`
 --
 ALTER TABLE `sanphams`
@@ -429,6 +483,12 @@ ALTER TABLE `trangthaidonhangs`
 ALTER TABLE `binhluans`
   ADD CONSTRAINT `binhluans_ibfk_1` FOREIGN KEY (`san_pham_id`) REFERENCES `sanphams` (`id`),
   ADD CONSTRAINT `binhluans_ibfk_2` FOREIGN KEY (`tai_khoan_id`) REFERENCES `taikhoans` (`id`);
+
+--
+-- Constraints for table `chitietbienthes`
+--
+ALTER TABLE `chitietbienthes`
+  ADD CONSTRAINT `chitietbienthes_ibfk_1` FOREIGN KEY (`sanpham_bien_the_id`) REFERENCES `sanphambienthes` (`id`);
 
 --
 -- Constraints for table `chitietdonhangs`
@@ -459,10 +519,16 @@ ALTER TABLE `giohangs`
   ADD CONSTRAINT `giohangs_ibfk_1` FOREIGN KEY (`tai_khoan_id`) REFERENCES `taikhoans` (`id`);
 
 --
+-- Constraints for table `sanphambienthes`
+--
+ALTER TABLE `sanphambienthes`
+  ADD CONSTRAINT `sanphambienthes_ibfk_1` FOREIGN KEY (`san_pham_id`) REFERENCES `sanphams` (`id`);
+
+--
 -- Constraints for table `sanphams`
 --
 ALTER TABLE `sanphams`
-  ADD CONSTRAINT `sanphams_ibfk_1` FOREIGN KEY (`danh_muc_id`) REFERENCES `danhmucs` (`id`);
+  ADD CONSTRAINT `fk_sanphams_danhmucs` FOREIGN KEY (`id_danh_muc`) REFERENCES `danhmucs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `taikhoans`
