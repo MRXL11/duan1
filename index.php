@@ -8,7 +8,8 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 require_once './controllers/HomeController.php';
 
 // Require toàn bộ file Models
-require_once './models/Sach.php';
+require_once './models/Book.php';
+require_once './models/Category.php';
 
 // Route
 $act = $_GET['act'] ?? '/'; // giống switchcase
@@ -19,7 +20,6 @@ match ($act) {
     // route
     // Trang chủ
     '/' => (new HomeController())->home(),
-    'trangchu'=> (new HomeController())->trangChu(),  // BASE_URL/?act='trangchu'
-
-    'danh-sach-sach'=>(new HomeController())->danhSachSach(),
+    'trangchu'=> (new HomeController())->home(),  // BASE_URL/?act='trangchu'
+    'home'  => (new HomeController())->home(), //
 };
