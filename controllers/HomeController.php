@@ -1,4 +1,5 @@
 <?php 
+require_once 'commons/function.php';
 class HomeController{
     public $modelCategory;
     public $modelBook;
@@ -8,6 +9,13 @@ class HomeController{
         $this->modelCategory = new Category();
     }
 
+
+    public static function index() {
+        checkLogin();
+        $user = $_SESSION['user'];
+        echo "<h1>Chào mừng, " . htmlspecialchars($user['ho_ten']) . "!</h1>";
+        echo "<a href='?controller=auth&action=logout'>Đăng xuất</a>";
+    }
     public function home(){
         // echo "Danh sách";
         $search = isset($_GET['search']) ? $_GET['search'] : '';

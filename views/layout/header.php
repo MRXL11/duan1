@@ -49,7 +49,6 @@
                                     </a>
                                 </li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
@@ -68,8 +67,16 @@
                                 </form>
                             </div> -->
                             <div class="tg-userlogin">
-                                <figure><a href="javascript:void(0);"><img src="uploads/users/img-01.jpg" alt="image description"></a></figure>
-                                <span>Hi, John</span>
+                                <!-- Kiểm tra người dùng đã đăng nhập chưa -->
+                                <?php if (isset($_SESSION['user'])): ?>
+                                    <!-- Nếu đã đăng nhập -->
+                                    <span>Hi, <?php echo $_SESSION['user']['ho_ten']; ?></span>
+                                    <a href="?act=logout" class="btn btn-danger ms-2">Đăng xuất</a> <!-- Đăng xuất -->
+                                <?php else: ?>
+                                    <!-- Nếu chưa đăng nhập -->
+                                    <a href="?act=login" class="btn btn-primary ms-2">Đăng nhập</a> <!-- Đăng nhập -->
+                                    <a href="?act=register" class="btn btn-primary ms-2">Đăng kí</a> <!-- Đăng kí -->
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

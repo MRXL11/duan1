@@ -12,6 +12,13 @@ require_once './controllers/AdminBookController.php';
 require_once './models/AdminBook.php'; 
 require_once './models/AdminCategory.php'; 
 
+if (!isset($_SESSION['user'])) {
+    header("Location: /duan1/?act=login");
+    exit;
+} elseif ($_SESSION['user']['chuc_vu_id'] != 1) {
+    header("Location: /duan1/?act=home");
+    exit;
+}
 // Route
 $act = $_GET['act'] ?? '/'; // giống switchcase
 
@@ -20,6 +27,7 @@ $act = $_GET['act'] ?? '/'; // giống switchcase
 match ($act) {
     // route
     // Danh mục
+    '/' => (new AdminCategoryController())->danhSachDanhMuc(),
     'danh-muc'=>(new AdminCategoryController())->danhSachDanhMuc(),
     'form-them-danh-muc'=>(new AdminCategoryController())->formAddDanhMuc(),
     'them-danh-muc'=>(new AdminCategoryController())->postAddDanhMuc(),
@@ -27,7 +35,7 @@ match ($act) {
     'sua-danh-muc'=>(new AdminCategoryController())->postEditDanhMuc(),
     'xoa-danh-muc'=>(new AdminCategoryController())->deleteDanhMuc(),
 
-
+    
     //sản phẩm
     'san-pham'=>(new AdminBookController())->danhSachSanPham(),
     'form-them-san-pham'=>(new AdminBookController())->formAddSanPham(),

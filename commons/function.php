@@ -53,3 +53,12 @@ function deleteSessionError(){
     }
 }
 
+// Kiểm tra người dùng đã đăng nhập hay chưa
+function checkLogin() {
+    session_start();
+    if (!isset($_SESSION['user'])) {
+        header("Location: ?controller=auth&action=login");
+        exit;
+    }
+}
+?>

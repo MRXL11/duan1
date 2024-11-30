@@ -15,3 +15,10 @@ define('DB_PASSWORD', '');
 define('DB_NAME'    , 'database_duan1');  // Tên database
 
 define('PATH_ROOT'    , __DIR__ . '/../');
+
+
+// Kiểm tra cấu hình bắt buộc
+if (!defined('DB_HOST') || !defined('DB_NAME')) {
+    die("Cấu hình không đầy đủ. Vui lòng kiểm tra file env.php.");
+}
+?>
