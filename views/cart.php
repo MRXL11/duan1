@@ -2,87 +2,85 @@
 
 <div class="row boxcontent cart">
     <div class="container">
-    <form method="post" action="?act=deleteSelected">
+    <form method="POST" action="?act=postOrder">
+
     <table>
-        <tr>
-            <th>Hình</th>
-            <th>Sản phẩm</th>
-            <th>Đơn giá</th>
-            <th>Số lượng</th>
-            <th>Thành tiền</th>
-            <th>Chọn</th>
-        </tr>
-        <?php
-        $tong = 0;
-        $i = 0; // Khởi tạo chỉ mục
-        // Kiểm tra nếu giỏ hàng không rỗng
-        if (isset($_SESSION['mycart']) && count($_SESSION['mycart']) > 0) {
-            foreach ($_SESSION['mycart'] as $cart) {
-                // Kiểm tra xem sản phẩm có đầy đủ thông tin không
-                if (empty($cart['ten']) || empty($cart['gia']) || empty($cart['hinh_anh'])) {
-                    continue; // Bỏ qua sản phẩm không đầy đủ thông tin
-                }
-
-                // Tạo checkbox xóa sản phẩm
-                $xoasp = '<input type="checkbox" name="selected_items[]" value="' . $i . '">';
-
-                // Nếu thông tin đầy đủ, tiếp tục xử lý
-                $ten = htmlspecialchars($cart['ten']);
-                $gia = htmlspecialchars($cart['gia']);
-                $hinh_anh = htmlspecialchars($cart['hinh_anh']);
-                $so_luong = htmlspecialchars($cart['so_luong'] ?? 1);
-                $thanh_tien = htmlspecialchars($cart['thanh_tien'] ?? 0);
-
-                // Tính tổng
-                $tong += $thanh_tien;
-                
-                // Hiển thị thông tin giỏ hàng
-                echo '
-                <tr>
-                    <td><img src="' . ($hinh_anh ? $hinh_anh : 'default-image.jpg') . '" alt="' . $ten . '" width="100"></td>
-                    <td>' . $ten . '</td>
-                    <td>' . number_format($gia, 2) . '</td>
-                    <td>' . $so_luong . '</td>
-                    <td>' . number_format($thanh_tien, 2) . '</td>
-                    <td>' . $xoasp . '</td>
-                </tr>';
-
-                // Tăng chỉ mục để cập nhật id
-                $i++;
-            }
-
-            echo '
+        <thead>
             <tr>
-                <td colspan="4">Tổng tiền đơn hàng</td>
-                <td>' . number_format($tong, 2) . '</td>
-            </tr>';
-        } else {
-            echo '<tr><td colspan="6">Giỏ hàng của bạn đang trống.</td></tr>';
-        }
-        ?>
+                <th>
+                    <!-- Checkbox "Chọn tất cả" -->
+                    <input type="checkbox" id="select_all">
+                </th>
+                <th>Sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($cartItems as $item): ?>
+                <tr>
+                    <td>
+                        <!-- Checkbox cho từng sản phẩm -->
+                        <input 
+                            type="checkbox" 
+                            name="selected_items[]" 
+                            value="<?= htmlspecialchars($item['san_pham_id']) ?>" 
+                            data-thanh-tien="<?= htmlspecialchars($item['thanh_tien']) ?>"
+                        >
+                    </td>
+                    <td><?= htmlspecialchars($item['ten']) ?></td>
+                    <td><img src="<?= htmlspecialchars($item['hinh_anh']) ?>" alt="Hình ảnh sản phẩm" width="50"></td>
+                    <td><?= number_format($item['so_luong'])?></td>
+                    <td><?= number_format($item['don_gia'], 0, ',', '.') ?> đ</td>
+                    <td><?= number_format($item['thanh_tien'], 0, ',', '.') ?> đ</td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
     </table>
 
-    <!-- Checkbox "Chọn tất cả" -->
     <div>
-        <input type="checkbox" id="select_all"> Chọn tất cả
+        <!-- Hiển thị tổng tiền -->
+        <strong>Tổng tiền: </strong>
+        <span id="tong-tien">0</span> đ
     </div>
 
-    <input type="submit" value="XÓA SẢN PHẨM ĐÃ CHỌN" name="delete_selected">
+    <button type="submit" name="buy_now">Mua hàng</button>
 </form>
 
     </div>
 </div>
-<script>
-    // Khi người dùng click vào checkbox "Chọn tất cả"
-    document.getElementById('select_all').addEventListener('change', function() {
-        // Lấy tất cả các checkbox của sản phẩm
-        var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
-        // Duyệt qua tất cả các checkbox và thay đổi trạng thái chọn
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = document.getElementById('select_all').checked;
+
+
+    <script>
+    function updateTotal() {
+        let total = 0;
+        document.querySelectorAll('input[name="selected_items[]"]:checked').forEach(function(checkbox) {
+            total += parseFloat(checkbox.getAttribute('data-thanh-tien')) || 0;
         });
+        document.getElementById('tong-tien').textContent = total.toLocaleString('vi-VN');
+    }
+
+    // Khi checkbox "Chọn tất cả" thay đổi
+    document.getElementById('select_all').addEventListener('change', function() {
+        const isChecked = this.checked;
+        document.querySelectorAll('input[name="selected_items[]"]').forEach(function(checkbox) {
+            checkbox.checked = isChecked;
+        });
+        updateTotal();
     });
+
+    // Cập nhật tổng tiền khi checkbox của từng sản phẩm thay đổi
+    document.querySelectorAll('input[name="selected_items[]"]').forEach(function(checkbox) {
+        checkbox.addEventListener('change', updateTotal);
+    });
+
+    // Chạy một lần để cập nhật tổng tiền khi tải trang
+    updateTotal();
 </script>
+
+
 
 
 <?php include_once 'layout/footer.php'; ?>

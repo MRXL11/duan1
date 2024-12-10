@@ -44,12 +44,13 @@
 
                                             <!-- <a class="tg-btn tg-active tg-btn-lg btn btn-primary w-100 mt-3" href="javascript:void(0);">Thêm vào giỏ hàng </a> -->
                                         </div>
-                                        <form action="?act=addtocart" method="POST">
-                                            <input type="hidden" name="id" value="<?= htmlspecialchars($book['id']) ?>">
-                                            <input type="hidden" name="ten" value="<?= htmlspecialchars($book['ten']) ?>">
-                                            <input type="hidden" name="gia" value="<?= htmlspecialchars($book['gia']) ?>">
-                                            <input type="hidden" name="hinh_anh" value="<?= htmlspecialchars($book['hinh_anh']) ?>">
-                                            <input type="submit" name="addtocart" value="Thêm vào giỏ hàng" class="tg-btn tg-active tg-btn-lg btn btn-primary w-100 mt-3">
+                                        <form action="?act=add-to-cart" method="POST">
+                                            <input type="hidden" name="san_pham_id" value="<?= $book['id']; ?>">
+                                            <input type="hidden" name="don_gia" value="<?= $book['gia']; ?>">
+                                            <input type="hidden" name="ten" value="<?= $book['ten']; ?>">
+                                            <input type="hidden" name="hinh_anh" value="<?= $book['hinh_anh']; ?>">
+                                            <input type="number" name="so_luong" value="1" min="1">
+                                            <button type="submit" class="btn btn-primary" name="addtocart" value="1">Thêm vào giỏ hàng</button>
                                         </form>
                                     </div>
                                 </div>

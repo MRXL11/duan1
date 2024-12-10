@@ -1,4 +1,4 @@
->
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -58,6 +58,10 @@
                                         <div class="mb-3">
                                             <label for="so_dien_thoai" class="form-label">Số điện thoại</label>
                                             <input type="number" class="form-control" id="so_dien_thoai" name="so_dien_thoai" placeholder="Nhập số điện thoại" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="dia_chi" class="form-label">Địa chỉ</label>
+                                            <input type="text" class="form-control" id="dia_chi" name="dia_chi" placeholder="Nhập địa chỉ" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="mat_khau" class="form-label">Mật khẩu</label>

@@ -9,12 +9,14 @@ require_once './controllers/HomeController.php';
 require_once './controllers/BookController.php';
 require_once './controllers/AuthController.php';
 require_once './controllers/CartController.php';
+require_once './controllers/OrderController.php';
 
 // Require toàn bộ file Models
 require_once './models/Book.php';
 require_once './models/Category.php';
 require_once './models/User.php';
 require_once './models/Cart.php';
+require_once './models/Order.php';
 
 session_start();
 
@@ -45,13 +47,18 @@ match ($act) {
 
     // giỏ hàng
     'cart' => (new CartController())->viewCart(),
-    'addtocart'=> (new CartController())->addToCart(),
-    'deletecart'=> (new CartController())->deleteCart(),
+    'add-to-cart' => (new CartController())->postAddToCart(),
+
     'deleteSelected' => (new CartController())->deleteSelected(),
 
+    'postOrder' => (new CartController())->postOrder(),
 
     // Đơn hàng
-    // 'order'=>(new OrderController())->viewOrder(),
+   'order' => (new OrderController())->viewOrder(),
+   'viewOrder' => (new OrderController())->viewOrder(),
+  'confirmOrder' => (new OrderController())->confirmOrder(),
+   'successOrder' => (new OrderController())->successOrder(),
+    'QRcode' => (new OrderController())->QRCode(),
     // Mặc định nếu không khớp
     default => die("404 - Không tìm thấy trang."),
 };

@@ -11,16 +11,16 @@ class User {
     }
 
     // Đăng ký người dùng
-    public static function register($hoTen, $email, $soDienThoai, $matKhau) {
+    public static function register($hoTen, $email, $soDienThoai, $matKhau,$diaChi) {
         if (self::emailExists($email)) {
             return "Email đã tồn tại!";
         }
 
         $conn = connectDB();
         $hashedPassword = password_hash($matKhau, PASSWORD_BCRYPT);
-        $stmt = $conn->prepare("INSERT INTO taikhoans (ho_ten, email, so_dien_thoai, mat_khau, chuc_vu_id, trang_thai) 
-                                VALUES (?, ?, ?, ?, ?, ?)");
-        if ($stmt->execute([$hoTen, $email, $soDienThoai, $hashedPassword, 2, 1])) {
+        $stmt = $conn->prepare("INSERT INTO taikhoans (ho_ten, email, so_dien_thoai, mat_khau, chuc_vu_id, trang_thai, dia_chi) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?)");
+        if ($stmt->execute([$hoTen, $email, $soDienThoai, $hashedPassword, 2, 1, $diaChi])) {
             return true;
         } else {
             return "Lỗi khi đăng ký!";

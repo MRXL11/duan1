@@ -98,7 +98,7 @@
                                         </div>
                                     </div>
                                     <div class="dropdown tg-themedropdown tg-minicartdropdown">
-                                        <a href="Location: ?act=cart" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a href="?act=cart" id="tg-minicart" class="tg-btnthemedropdown">
                                             <i class="icon-cart"></i>
                                         </a>
                                     </div>
