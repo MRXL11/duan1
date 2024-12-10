@@ -17,8 +17,8 @@
 									<div class="tg-postbook">
 										<figure class="tg-featureimg">
 											<div class="tg-bookimg">
-												<div class="tg-frontcover"><img src="uploads/books/img-01.jpg" alt="image description"></div>
-												<div class="tg-backcover"><img src="uploads/books/img-01.jpg" alt="image description"></div>
+												<div class="tg-frontcover"><img src="/uploads/books/img-01.jpg" alt="image description"></div>
+												<div class="tg-backcover"><img src="/uploads/books/img-01.jpg" alt="image description"></div>
 											</div>
 											<a class="tg-btnaddtowishlist" href="javascript:void(0);">
 												<i class="icon-heart"></i>
@@ -42,7 +42,7 @@
 											</span>
 											<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 												<i class="fa fa-shopping-basket"></i>
-												<em>Add To Basket</em>
+												<em>Thêm Vào Giỏ Hàng</em>
 											</a>
 										</div>
 									</div>

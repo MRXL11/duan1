@@ -42,14 +42,14 @@ class AuthController {
                 // Điều hướng dựa vào chuc_vu_id
                 if ($user['chuc_vu_id'] == 1) {
                     // Quản trị viên, điều hướng đến trang admin
-                    header("Location: /duan1/admin/index.php"); 
+                    header("Location: /admin/index.php"); 
                 } else {
                     // Người dùng thông thường, điều hướng đến trang người dùng
-                    header("Location: /duan1/index.php");
+                    header("Location: /index.php");
                 }
                 exit;
             } else {
-                die("Email hoặc mật khẩu không đúng!");
+                $error_message = "Email hoặc mật khẩu không đúng!";
             }
         }
         require './views/login.php';

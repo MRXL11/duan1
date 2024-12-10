@@ -1,4 +1,7 @@
 <?php 
+if(!isset($_SESSION['cart'])){
+    $_SESSION['cart']=array();
+}
 require_once 'commons/function.php';
 class HomeController{
     public $modelCategory;

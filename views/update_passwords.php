@@ -1,6 +1,6 @@
 <?php
-require_once 'commons/env.php';
-require_once 'commons/function.php';
+require_once './commons/env.php';
+require_once './commons/function.php';
 
 $conn = connectDB();
 $stmt = $conn->prepare("SELECT id, mat_khau FROM taikhoans");
@@ -15,4 +15,4 @@ foreach ($users as $user) {
         ':id' => $user['id']
     ]);
 }
-echo "Đã mã hóa xong mật khẩu!";
+// echo "Đã mã hóa xong mật khẩu!";

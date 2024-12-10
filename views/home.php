@@ -19,7 +19,7 @@
 
                                                 <figure class="tg-featureimg">
                                                     <div class="tg-bookimg">
-                                                    <a href="?act=bookDetail&id=<?= $book['id'] ?>">    
+                                                    <a href="?act=bookDetail&id=<?= htmlspecialchars($book['id']) ?>">    
                                                         <div class="tg-frontcover"><img src="<?= BASE_URL . $book['hinh_anh'] ?>" style="width: 100%; height: 100%; object-fit: cover;" alt=""
                                                                 onerror="this.onerror=null;
                                                              this.src='https://khothietke.net/wp-content/uploads/2021/05/PNGkhothietke.net-02705.png'"></div>
@@ -44,12 +44,13 @@
                                                     <span class="tg-stars"><span></span></span>
                                                     <span class="tg-bookprice">
                                                         <ins>Giá: <?= $book['gia'] ?></ins>
-                                                        <del>$27.20</del>
+                                                         
+
                                                     </span>
-                                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                                                    <!-- <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
                                                         <i class="fa fa-shopping-basket"></i>
                                                         <em>Thêm vào giỏ hàng</em>
-                                                    </a>
+                                                    </a> -->
                                                 </div>
 
                                             </div>

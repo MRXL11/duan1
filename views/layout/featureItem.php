@@ -20,7 +20,7 @@
 										</span>
 										<a class="tg-btn tg-btnstyletwo tg-active" href="javascript:void(0);">
 											<i class="fa fa-shopping-basket"></i>
-											<em>Add To Basket</em>
+											<em>Thêm Vào Giỏ Hàng</em>
 										</a>
 									</div>
 								</div>

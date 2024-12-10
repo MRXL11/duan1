@@ -1,4 +1,6 @@
-<?php include_once 'layout/header.php'; ?>
+<?php include_once 'layout/header.php';
+
+?>
 
 <div class="tg-sectionspace tg-haslayout">
     <div class="container">
@@ -11,42 +13,60 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-8 col-md-12 col-lg-4">
                                     <div class="tg-postbook">
-                                        <figure class="tg-featureimg"><img src="images/books/img-07.jpg" alt="image description"></figure>
+                                        <figure class="tg-featureimg">
+                                            <img src="<?= htmlspecialchars($book['hinh_anh']) ?>" alt="<?= htmlspecialchars($book['ten']) ?>" class="img-fluid">
+                                        </figure>
+                                        <!-- Nội dung sản phẩm -->
                                         <div class="tg-postbookcontent">
                                             <span class="tg-bookprice">
-                                                <ins>$25.18</ins>
-                                                <del>$27.20</del>
+                                                <ins>$<?= htmlspecialchars(number_format($book['gia'], 2)); ?></ins>
                                             </span>
-                                            <span class="tg-bookwriter">You save $4.02</span>
-                                            <ul class="tg-delevrystock">
-                                                <li><i class="icon-rocket"></i><span>Free delivery worldwide</span></li>
-                                                <li><i class="icon-checkmark-circle"></i><span>Dispatch from the USA in 2 working days </span></li>
-                                                <li><i class="icon-store"></i><span>Status: <em>In Stock</em></span></li>
+                                            <!-- Trạng thái -->
+                                            <ul class="tg-delevrystock list-unstyled">
+                                                <li>
+                                                    <i class="icon-store"></i>
+                                                    <span>Trạng thái:
+                                                        <em class="<?= $book['trang_thai'] == 1 ? 'text-success' : 'text-danger'; ?>">
+                                                            <?= $book['trang_thai'] == 1 ? 'Còn hàng' : 'Hết hàng'; ?>
+                                                        </em>
+                                                    </span>
+                                                </li>
                                             </ul>
                                             <div class="tg-quantityholder">
-                                                <em class="minus">-</em>
-                                                <input type="text" class="result" value="0" id="quantity1" name="quantity">
-                                                <em class="plus">+</em>
+                                                <h3>Sách có bán dưới dạng:</h3>
+                                                <ul>
+                                                    <li><span>CD-Audio $18.30</span></li>
+                                                    <li><span>Paperback $20.10</span></li>
+                                                    <li><span>E-Book $11.30</span></li>
+                                                </ul>
                                             </div>
-                                            <a class="tg-btn tg-active tg-btn-lg" href="javascript:void(0);">Add To Basket</a>
-                                            <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                                <span>add to wishlist</span>
-                                            </a>
+                                            <!-- Thêm vào giỏ hàng -->
+
+                                            <!-- <a class="tg-btn tg-active tg-btn-lg btn btn-primary w-100 mt-3" href="javascript:void(0);">Thêm vào giỏ hàng </a> -->
                                         </div>
+                                        <form action="?act=addtocart" method="POST">
+                                            <input type="hidden" name="id" value="<?= htmlspecialchars($book['id']) ?>">
+                                            <input type="hidden" name="ten" value="<?= htmlspecialchars($book['ten']) ?>">
+                                            <input type="hidden" name="gia" value="<?= htmlspecialchars($book['gia']) ?>">
+                                            <input type="hidden" name="hinh_anh" value="<?= htmlspecialchars($book['hinh_anh']) ?>">
+                                            <input type="submit" name="addtocart" value="Thêm vào giỏ hàng" class="tg-btn tg-active tg-btn-lg btn btn-primary w-100 mt-3">
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                     <div class="tg-productcontent">
                                         <ul class="tg-bookscategories">
-                                            <li><a href="javascript:void(0);">Art &amp; Photography</a></li>
+                                            <li><a href="javascript:void(0);">
+                                                    <?= htmlspecialchars($book['ten_danh_muc'] ?? 'Không có danh mục') ?>
+                                                </a></li>
                                         </ul>
                                         <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                         <div class="tg-booktitle">
-                                            <h3>Drive Safely, No Bumping</h3>
+                                            <h3 class="fw-bold"><?= htmlspecialchars($book['ten']); ?></h3>
                                         </div>
-                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
+                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);"><?= htmlspecialchars($book['tac_gia']); ?></a></span>
                                         <span class="tg-stars"><span></span></span>
-                                        <span class="tg-addreviews"><a href="javascript:void(0);">Add Your Review</a></span>
+                                        <span class="tg-addreviews"><a href="javascript:void(0);">Thêm nhận xét</a></span>
                                         <div class="tg-share">
                                             <span>Share:</span>
                                             <ul class="tg-socialicons">
@@ -62,29 +82,21 @@
                                             <p>Arure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat nulla aetur excepteur sint occaecat cupidatat non proident, sunt in culpa quistan officia serunt mollit anim id est laborum sed ut perspiciatis unde omnis iste natus</p>
                                         </div>
                                         <div class="tg-sectionhead">
-                                            <h2>Product Details</h2>
+                                            <h2>Thông tin sản phẩm</h2>
                                         </div>
                                         <ul class="tg-productinfo">
-                                            <li><span>Tên sách:</span><span>Hardback</span></li>
-                                            <li><span>Tác giả:</span><span>Hardback</span></li>
-                                            <li><span>Danh mục:</span><span>Hardback</span></li>
-                                            <li><span>Giá:</span><span>Hardback</span></li>
-                                            <li><span>Trạng thái:</span><span>Hardback</span></li>
-                                            <li><span>Mô tả:</span><span>Hardback</span></li>
+                                            <li><span>Tên sách:</span><span><?= htmlspecialchars($book['ten']) ?></span></li>
+                                            <li><span>Tác giả:</span><span><?= htmlspecialchars($book['tac_gia']); ?></span></li>
+                                            <li><span>Danh mục:</span><span><?= htmlspecialchars($book['ten_danh_muc'] ?? 'Không có danh mục') ?></span></li>
+                                            <li><span>Giá:</span><span>$<?= htmlspecialchars(number_format($book['gia'], 2)); ?></span></li>
+                                            <li><span>Trạng thái:</span><span>
+                                                    <em class="<?= $book['trang_thai'] == 1 ? 'text-success' : 'text-danger'; ?>">
+                                                        <?= $book['trang_thai'] == 1 ? 'Còn hàng' : 'Hết hàng'; ?>
+                                                    </em>
+                                                </span></li>
+                                            <li><span>Mô tả:</span><span><?= htmlspecialchars($book['mo_ta']); ?></span></li>
                                         </ul>
-                                        <div class="tg-alsoavailable">
-                                            <figure>
-                                                <img src="../uploads/img-02.jpg" alt="image description">
-                                                <figcaption>
-                                                    <h3>Also Available in:</h3>
-                                                    <ul>
-                                                        <li><span>CD-Audio $18.30</span></li>
-                                                        <li><span>Paperback $20.10</span></li>
-                                                        <li><span>E-Book $11.30</span></li>
-                                                    </ul>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
