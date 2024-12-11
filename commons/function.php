@@ -23,14 +23,18 @@ function connectDB() {
 
 
 
-function upLoadFile($file,$folderUpdate){
-    $pathStorage = $folderUpdate . time() . $file['name'];
+function upLoadFile($file, $folderUpdate)
+{
+    $pathStorage = $folderUpdate . time() . basename($file['name']);
     $from = $file['tmp_name'];
-    $to = PATH_ROOT .$pathStorage ;
-    if(move_uploaded_file($from,$to)){
-        return $pathStorage ;
+    $to = PATH_ROOT . $pathStorage;
+
+    if ($file['error'] === UPLOAD_ERR_OK) {
+        if (move_uploaded_file($from, $to)) {
+            return $pathStorage;
+        }
     }
-    return null ;
+    return null;
 }
 function deleteFile($file){
     $pathDelete = PATH_ROOT . $file ;
@@ -44,15 +48,15 @@ function deleteFile($file){
 
 
 // xóa sesison sau khi load trang
-function deleteSessionError(){
-    if(isset($_SESSION['flash'])){
-        // hủy sesion sau khi tải trang 
+function deleteSessionError()
+{
+    if (isset($_SESSION['flash'])) {
         unset($_SESSION['flash']);
-        session_unset();
-        session_destroy();
+    }
+    if (isset($_SESSION['error'])) {
+        unset($_SESSION['error']);
     }
 }
-
 // Kiểm tra người dùng đã đăng nhập hay chưa
 function checkLogin() {
     session_start();

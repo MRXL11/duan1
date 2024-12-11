@@ -46,6 +46,22 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?=BASE_URL_ADMIN.'?act=don-hang' ?>" class="nav-link">
+                    <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Đơn hàng
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=BASE_URL_ADMIN.'?act=quan-ly-nguoi-dung' ?>" class="nav-link">
+                    <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Tài khoản
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

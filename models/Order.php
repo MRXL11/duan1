@@ -33,6 +33,27 @@ class Order {
 
     return $stmt->fetchAll();
 }
+public function getOrderHistoryByUserId($tai_khoan_id) {
+    $sql = "
+        SELECT 
+            dh.id, 
+            dh.ten_nguoi_nhan, 
+            dh.sdt_nguoi_nhan, 
+            dh.dia_chi_nguoi_nhan, 
+            dh.ngay_dat_hang, 
+            dh.tong_tien, 
+            tsdh.ten_trang_thai AS trang_thai
+        FROM 
+            donhangs dh
+        JOIN 
+            trangthaidonhangs tsdh ON dh.trang_thai_id = tsdh.id
+        WHERE 
+            dh.tai_khoan_id = ?
+    ";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([$tai_khoan_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
 
 public function getPaymentMethods()
@@ -72,9 +93,9 @@ public function createOrder($userId, $ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_chi_
     return $order_id;
 }
 public function getUserInfoById($userId) {
-    $sql = "SELECT ho_ten, dia_chi, so_dien_thoai FROM taikhoans WHERE id = ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->execute([$userId]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
+        $sql = "SELECT ho_ten, dia_chi, so_dien_thoai FROM taikhoans WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

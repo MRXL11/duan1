@@ -57,8 +57,11 @@ match ($act) {
    'order' => (new OrderController())->viewOrder(),
    'viewOrder' => (new OrderController())->viewOrder(),
   'confirmOrder' => (new OrderController())->confirmOrder(),
-   'successOrder' => (new OrderController())->successOrder(),
-    'QRcode' => (new OrderController())->QRCode(),
+//    'successOrder' => (new OrderController())->successOrder(),
+//     'QRcode' => (new OrderController())->QRCode(),
+'orderHistory' => (new OrderController())->orderHistory(),
+
+    'remove_item'=> (new OrderController())->removeItemFromCart(),
     // Mặc định nếu không khớp
     default => die("404 - Không tìm thấy trang."),
 };

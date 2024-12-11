@@ -148,4 +148,23 @@ public function QRCode()
         echo "Không tìm thấy thông tin đơn hàng.";
     }
 }
+
+public function orderHistory() {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Kiểm tra người dùng đã đăng nhập
+    $tai_khoan_id = $_SESSION['user']['id'] ?? 0;
+    if (!$tai_khoan_id) {
+        echo "<script>alert('Vui lòng đăng nhập để xem lịch sử đơn hàng!'); window.location.href = '?act=login';</script>";
+        exit();
+    }
+
+    // Gọi model để lấy danh sách đơn hàng của người dùng
+    $orderHistory = $this->orderModel->getOrderHistoryByUserId($tai_khoan_id);
+
+    // Gửi dữ liệu đến view
+    include './views/orderHistory.php';  // Bạn sẽ tạo view này để hiển thị lịch sử đơn hàng
+}
 }

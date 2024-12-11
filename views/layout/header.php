@@ -87,13 +87,12 @@
                                 </nav>
                                 <div class="tg-wishlistandcart">
                                     <div class="dropdown tg-themedropdown tg-wishlistdropdown">
-                                        <a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                            <i class="icon-heart"></i>
+                                    <a href="?act=orderHistory" id="tg-minicart" class="tg-btnthemedropdown">
+                                            <i class="icon-cart"></i>
                                         </a>
                                         <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
                                             <div class="tg-description">
-                                                <p>No products were added to the wishlist!</p>
+                                                
                                             </div>
                                         </div>
                                     </div>
